@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Shanella 💜</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0a043c, #1b065e, #2c1b7a, #523a97);
+      background-size: 300% 300%;
+      animation: gradientShift 10s ease infinite;
+      color: white;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(90, 60, 200, 0.15);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 25px;
+      z-index: 100;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    nav h1 {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #8ab4ff, #cfaaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #d6cfff;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ffffff;
+    }
+
+    section {
+      padding: 120px 20px 60px;
+      width: 100%;
+      max-width: 1000px;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 38px;
+      margin-bottom: 15px;
+      background: linear-gradient(45deg, #b6a6ff, #8ab4ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 17px;
+      line-height: 1.8;
+      max-width: 750px;
+      margin: 0 auto 25px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .profile {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(180, 150, 255, 0.6);
+      box-shadow: 0 0 25px rgba(120, 100, 255, 0.5);
+      margin-bottom: 25px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    .about-box {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border-radius: 25px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .skill {
+      background: rgba(180, 150, 255, 0.15);
+      border-radius: 20px;
+      padding: 10px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      color: white;
+      box-shadow: 0 3px 10px rgba(150, 120, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-4px);
+    }
+
+    .games {
+      margin-top: 80px;
+    }
+
+    .game-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      width: 280px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      backdrop-filter: blur(15px);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(138, 180, 255, 0.4);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      background: linear-gradient(45deg, #8ab4ff, #b388ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: auto;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 30px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .game-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .card {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h1>Shanella 💫</h1>
+    <ul>
+      <li><a href="portfolio.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="game.html">Games</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+
+  <section>
+    <div class="about-box">
+      <img src="images/pfp.jfif" alt="Shanella Profile" class="profile">
+      <p>Welcome to my world of calm shadows and glowing dreams. I find beauty in art, mystery in games, and power in
+        the quiet moments. Every creation I make reflects both grace and strength.</p>
+      <p>In <strong>Honor of Kings</strong>, I find inspiration in heroes that blend elegance with might — each one
+        carrying a story and soul.</p>
+      <div class="skills">
+        <div class="skill">🎨 Aesthetic Design</div>
+        <div class="skill">💻 Web Creation</div>
+        <div class="skill">🌌 Creativity</div>
+        <div class="skill">⚔️ Gaming</div>
+        <div class="skill">💭 Storytelling</div>
+      </div>
+
+      <div class="games">
+        <h2>My HOK Heroes 🌙</h2>
+        <div class="game-cards">
+          <div class="card">
+            <img src="images/umbrosa.jfif" alt="Umbrosa">
+            <h3>Umbrosa 🌑</h3>
+            <p>A silent shadow who moves with grace — dark, mysterious, and endlessly captivating. Her strength lies in
+              stillness and precision.</p>
+          </div>
+          <div class="card">
+            <img src="images/brokenmirage.jfif" alt="Broken Mirage">
+            <h3>Broken Mirage 💫</h3>
+            <p>Where illusion meets reality — she bends light and darkness alike. A vision of elegance wrapped in power.
+            </p>
+          </div>
+          <div class="card">
+            <img src="images/scorchette.jfif" alt="Scorchette">
+            <h3>Scorchette 🔥</h3>
+            <p>Blazing beauty that never dims — her spirit burns fierce and radiant, illuminating every battlefield she
+              graces.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2025 Claire Shanella Magano — All Rights Reserved</footer>
+</body>
+
+</html>

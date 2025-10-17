@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shanella’s Game | Click the Cat 🐱</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #1a0033, #0a0020, #2a005a, #0a0020);
+      background-size: 400% 400%;
+      animation: gradientBG 12s ease infinite;
+      color: #fff;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 60px;
+      z-index: 1000;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.6);
+    }
+
+    nav .logo {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #8ab4ff, #d3a3ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 35px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #fff;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%;
+    }
+
+    .container {
+      margin-top: 120px;
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
+      border-radius: 25px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    h1 {
+      font-size: 28px;
+      background: linear-gradient(45deg, #8ab4ff, #b388ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 25px;
+      font-size: 16px;
+    }
+
+    .cat-preview {
+      display: block;
+      margin: 0 auto 20px;
+      width: 80px;
+      height: auto;
+      border-radius: 15px;
+      image-rendering: pixelated;
+      box-shadow: 0 0 25px rgba(167, 138, 255, 0.6);
+      border: 3px solid #b388ff;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    #game-container {
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+      height: 300px;
+      margin: 0 auto;
+      background: #1b1736;
+      border: 4px solid #b388ff;
+      border-radius: 15px;
+      overflow: hidden;
+      image-rendering: pixelated;
+      box-shadow: 0 0 25px rgba(138, 180, 255, 0.4);
+      cursor: url('https://cur.cursors-4u.net/cursors/cur-2/cur103.cur'), auto;
+    }
+
+    #cat {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      cursor: pointer;
+      image-rendering: pixelated;
+      transition: transform 0.1s;
+    }
+
+    #cat:active {
+      transform: scale(0.9);
+    }
+
+    #score {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #c5d1ff;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 30px 0;
+    }
+
+    @media (max-width: 850px) {
+      nav {
+        padding: 15px 25px;
+      }
+
+      nav ul {
+        gap: 20px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .cat-preview {
+        width: 140px;
+      }
+
+      #game-container {
+        height: 250px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        display: none;
+      }
+
+      nav .logo {
+        margin: 0 auto;
+        font-size: 20px;
+      }
+
+      .container {
+        width: 95%;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .cat-preview {
+        width: 130px;
+      }
+
+      #game-container {
+        height: 220px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="logo">Shanella</div>
+    <ul>
+      <li><a href="portfolio.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="game.html" class="active">Game</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Click the Cat 🐱</h1>
+    <img src="images/cat1.webp" alt="Cat Preview" class="cat-preview">
+    <p>Test your reflexes! Click the pixel cat as fast as you can before it runs away!</p>
+
+    <div id="game-container">
+      <img src="images/cat2.webp" id="cat" alt="Pixel Cat">
+    </div>
+
+    <div id="score">Score: 0</div>
+  </div>
+
+  <footer>© 2025 Claire Shanella Magano — All Rights Reserved</footer>
+
+  <script>
+    const cat = document.getElementById('cat');
+    const scoreDisplay = document.getElementById('score');
+    let score = 0;
+
+    function moveCat() {
+      const container = document.getElementById('game-container');
+      const maxX = container.clientWidth - cat.clientWidth;
+      const maxY = container.clientHeight - cat.clientHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      cat.style.left = `${x}px`;
+      cat.style.top = `${y}px`;
+    }
+
+    cat.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      moveCat();
+    });
+
+    setInterval(moveCat, 1000);
+    moveCat();
+  </script>
+</body>
+
+</html>

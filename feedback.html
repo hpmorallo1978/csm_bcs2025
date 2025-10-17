@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feedback</title>
+  <style>
+    /* Body and gradient animation */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(-45deg, #ff6ec4, #7873f5, #4ade80, #facc15);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Navigation bar */
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.25);
+      position: fixed;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    nav .logo {
+      font-size: 22px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #ff6ec4, #7873f5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ffbdf3;
+    }
+
+    /* Rating card layout */
+    .wrapper {
+      margin-top: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 20px;
+    }
+
+    .rating-card {
+      width: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to right bottom, #443e89, #0f0c29);
+      padding: 30px;
+      border-radius: 12px;
+      gap: 15px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .text-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .text-primary {
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .text-secondary {
+      color: #cccccc;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    .rating-stars-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .star-label svg {
+      fill: rgb(210, 210, 210);
+      width: 24px;
+      height: auto;
+      transition: fill 0.3s ease;
+    }
+
+    .rating-stars-container input {
+      appearance: none;
+    }
+
+    .rating-stars-container input:hover ~ .star-label svg {
+      fill: rgb(255, 204, 185);
+    }
+
+    .rating-stars-container input:checked ~ .star-label svg {
+      fill: rgb(255, 102, 47);
+      animation: slide-in-fwd-center 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    @keyframes slide-in-fwd-center {
+      0% { transform: scale(1.6); }
+      100% { transform: scale(1); }
+    }
+
+    /* Social icons placeholder */
+    .socials-container {
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .social-button svg {
+      width: 20px;
+      fill: rgb(228, 228, 228);
+      transition: fill 0.3s ease;
+    }
+
+    .social-button:hover svg {
+      fill: rgb(255, 102, 47);
+    }
+
+    @media(max-width: 600px){
+      .rating-card {
+        width: 90%;
+      }
+
+      nav ul {
+        gap: 15px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">Shanella 💫</div>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="game.html">Game</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+
+  <!-- Rating Card -->
+  <div class="wrapper">
+    <div class="rating-card">
+      <div class="text-wrapper">
+        <p class="text-primary">Please Rate My Portfolio</p>
+        <p class="text-secondary">What can you rate to my portfolio?</p>
+      </div>
+
+      <div class="rating-stars-container">
+        <input value="star-5" name="star" id="star-5" type="radio" />
+        <label for="star-5" class="star-label">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+            </path>
+          </svg>
+        </label>
+        <input value="star-4" name="star" id="star-4" type="radio" />
+        <label for="star-4" class="star-label">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+            </path>
+          </svg>
+        </label>
+        <input value="star-3" name="star" id="star-3" type="radio" />
+        <label for="star-3" class="star-label">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+            </path>
+          </svg>
+        </label>
+        <input value="star-2" name="star" id="star-2" type="radio" />
+        <label for="star-2" class="star-label">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+            </path>
+          </svg>
+        </label>
+        <input value="star-1" name="star" id="star-1" type="radio" />
+        <label for="star-1" class="star-label">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+            </path>
+          </svg>
+        </label>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

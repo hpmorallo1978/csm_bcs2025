@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coquette Gallery 🌷</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffb6c1, #f5a6e6, #b7a4ff);
+      background-size: 300% 300%;
+      animation: gradientShift 8s ease infinite;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 25px;
+      z-index: 100;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    nav h1 {
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #f755c6, #8e54f4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #fff5fa;
+    }
+
+    .tulip-border {
+      position: absolute;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .tulip-top,
+    .tulip-bottom {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .tulip-left,
+    .tulip-right {
+      position: absolute;
+      top: 60px;
+      bottom: 60px;
+      width: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tulip-left {
+      left: 0;
+    }
+
+    .tulip-right {
+      right: 0;
+    }
+
+    .tulip {
+      width: 35px;
+      height: 35px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-5px) rotate(3deg);
+      }
+    }
+
+    .hero {
+      text-align: center;
+      margin-top: 120px;
+      margin-bottom: 30px;
+      color: white;
+      z-index: 3;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .hero h2 {
+      font-size: 42px;
+      font-weight: 700;
+      font-size: 20px;
+      font-weight: 700;
+      background: linear-gradient(45deg, #f755c6, #8e54f4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+
+    }
+
+    .album-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom: 30px;
+      z-index: 3;
+    }
+
+    .album-tab {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 22px;
+      color: white;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    .album-tab::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: white;
+      transition: width 0.3s ease;
+    }
+
+    .album-tab:hover::after,
+    .album-tab.active::after {
+      width: 100%;
+    }
+
+    .album-tab:hover {
+      transform: translateY(-3px);
+      color: #fff5fa;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 80%;
+      max-width: 700px;
+      height: 450px;
+      overflow: hidden;
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(15px);
+      cursor: grab;
+      z-index: 3;
+      border: 4px solid rgba(255, 255, 255, 0.4);
+      animation: popIn 1s ease forwards;
+    }
+
+    .slider-container:active {
+      cursor: grabbing;
+    }
+
+    .slider-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 0.8s ease, transform 1.2s ease;
+      border-radius: 25px;
+    }
+
+    .slider-container img.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: white;
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 25px;
+      z-index: 3;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 15px;
+      }
+
+      .album-tab {
+        font-size: 18px;
+      }
+
+      .slider-container {
+        height: 320px;
+        width: 90%;
+      }
+
+      .hero h2 {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .album-tabs {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .hero h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h1>Shanella🌷</h1>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="game.html">Game</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="business.html">Business</a></li>
+      <li><a href="feedback.html">Feedback</a></li>
+    </ul>
+  </nav>
+  <div class="tulip-border tulip-top">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+  </div>
+  <div class="tulip-border tulip-bottom">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+  </div>
+  <div class="images/tulip-border tulip-left">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+  </div>
+  <div class="images/tulip-border tulip-right">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+    <img src="images/tulip.png" class="tulip">
+  </div>
+  <section class="hero">
+    <h2>Gallery</h2>
+  </section>
+  <div class="album-tabs">
+    <div class="album-tab active" onclick="showAlbum('love')">Love 💕</div>
+    <div class="album-tab" onclick="showAlbum('family')">Family 👨‍👩‍👧‍👦</div>
+  </div>
+  <div class="slider-container" id="slider"></div>
+  <footer>© 2025 Claire Shanella Magano — All Rights Reserved</footer>
+  <script>
+    const albums = {
+      love: ["images/fred.jpg", "images/us.jpg", "images/love3.jpg", "images/love2.jpg", "images/love.jpg", "images/meow.jpg"],
+      family: ["images/family.jpg", "images/fam.jpg", "images/fam1.jpg", "images/fam2.jpg"]
+    };
+    const container = document.getElementById("slider");
+    const tabs = document.querySelectorAll(".album-tab");
+    let currentAlbum = "love";
+    let currentIndex = 0;
+    let images = [];
+    let startX = 0;
+    let isDragging = false;
+    function createSlides(album) {
+      container.innerHTML = "";
+      albums[album].forEach((src, i) => {
+        const img = document.createElement("img");
+        img.src = src;
+        if (i === 0) img.classList.add("active");
+        container.appendChild(img);
+      });
+      images = container.querySelectorAll("img");
+    }
+    function showAlbum(album) {
+      tabs.forEach(t => t.classList.remove("active"));
+      document.querySelector(`.album-tab[onclick="showAlbum('${album}')"]`).classList.add("active");
+      currentAlbum = album;
+      currentIndex = 0;
+      createSlides(album);
+    }
+    function showSlide(index) {
+      images.forEach(img => img.classList.remove("active"));
+      images[index].classList.add("active");
+    }
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % images.length;
+      showSlide(currentIndex);
+    }
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showSlide(currentIndex);
+    }
+    container.addEventListener("mousedown", e => {
+      isDragging = true;
+      startX = e.clientX;
+    });
+    container.addEventListener("mouseup", e => {
+      if (!isDragging) return;
+      const diff = e.clientX - startX;
+      if (diff > 100) prevSlide();
+      else if (diff < -100) nextSlide();
+      isDragging = false;
+    });
+    container.addEventListener("touchstart", e => {
+      startX = e.touches[0].clientX;
+    });
+    container.addEventListener("touchend", e => {
+      const diff = e.changedTouches[0].clientX - startX;
+      if (diff > 100) prevSlide();
+      else if (diff < -100) nextSlide();
+    });
+    createSlides("love");
+  </script>
+</body>
+
+</html>
